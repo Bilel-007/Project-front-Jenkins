@@ -1,4 +1,7 @@
 pipeline {
+    environnement {
+        scannerHome = tool name: 'sonarqube-scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+    }
     agent {
         docker {
             image 'node:lts-buster-slim'
@@ -6,6 +9,20 @@ pipeline {
         }
     }
     stages {
+        stage("test-sonar"){
+            steps{
+                script {
+                    withSonarQubeEnv("sonarQube") {
+                    sh "${scannerHome}/bin/sonar-scanner \
+                        -Dsonar.projectKey=project front \
+                        -Dsonar.sources=. \
+                        -Dsonar.host.url=http://localhost:9000/ \
+                        -Dsonar.login=admin \
+                        -Dsonar.password=Bi22032021..**"
+                    } 
+                }
+            }
+        }
         stage('Build') {
             steps {
                 sh 'npm install'
