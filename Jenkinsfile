@@ -17,8 +17,8 @@ pipeline {
                     sh "${scannerHome}/bin/sonar-scanner \
                       -Dsonar.projectKey=Project-Devops \
                       -Dsonar.sources=. \
-                      -Dsonar.host.url=http:\/\/localhost:9000 \
-                      -Dsonar.login=5d7f5fbb00f909cb1e91101e807f7d7120c550b2 "
+                      -Dsonar.host.url=http://localhost:9000 \
+                      -Dsonar.login=5d7f5fbb00f909cb1e91101e807f7d7120c550b2"
                         
                         // "${scannerHome}/bin/sonar-scanner \
                         // -Dsonar.projectKey=project front \
