@@ -1,6 +1,6 @@
 pipeline {
     environment {
-        def scannerHome = tool 'sonarqube-scanner'
+        scannerHome = tool 'sonarqube-scanner'
     }
     agent any
 //         docker {
