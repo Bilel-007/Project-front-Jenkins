@@ -1,6 +1,6 @@
 pipeline {
     environment {
-        scannerHome = tool 'sonarqube-scanner'
+        scannerHome = tool name: 'sonarqube-scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
     }
     agent any
 //         docker {
