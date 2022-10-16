@@ -1,7 +1,5 @@
 pipeline {
     environment {
-            JAVA_HOME="${tool 'openjdk-11'}/jdk-11"
-    PATH="${tool 'openjdk-11'}/jdk-11/bin:$HOME/.dotnet/tools/:$PATH" 
         def scannerHome = tool 'sonarqube-scanner'
     }
     agent {
