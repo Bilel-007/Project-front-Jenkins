@@ -1,6 +1,7 @@
 pipeline {
     environment {
         scannerHome = tool name: 'sonarqube-scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+        registryCredential = 'Docker_credent'
     }
     agent any
 //         docker {
@@ -34,8 +35,22 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'npm install'
+                sh 'npm run build'
             }
         }
+        
+        stage("docker-build"){
+            steps{
+                script {
+                    dockerImage = docker.build imagename   
+                    docker.withRegistry( '', registryCredential ) {
+//                    dockerImage.push("$BUILD_NUMBER")
+                    dockerImage.push('latest')
+                    }
+                }
+            }
+        }
+        
         stage('Test') {
             steps {
                 sh './jenkins/scripts/test.sh'
