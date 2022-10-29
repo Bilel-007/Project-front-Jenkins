@@ -37,8 +37,14 @@ pipeline {
             steps{
                 script {
                     dockerImage = docker.build ("projectfront")   
+                }
+            }
+        }
+        
+        stage("docker-deploy-img"){
+            steps{
+                script {
                     docker.withRegistry( '', registryCredential ) {
-//                    dockerImage.push("$BUILD_NUMBER")
                     dockerImage.push('latest')
                     }
                 }
