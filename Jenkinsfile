@@ -20,13 +20,6 @@ pipeline {
                             -Dsonar.host.url=http://localhost:9000 \
                             -Dsonar.login=c8b2c764943238488fb46caf357927b330c86cbf"
                         
-                        // "${scannerHome}/bin/sonar-scanner \
-                        // -Dsonar.projectKey=project front \
-                        // -Dsonar.sources=. \
-                       //  -Dsonar.host.url=http://localhost:9000/ \
-                       // -Dsonar.login=admin \
-                       // -Dsonar.password=Bi22032021..**"
-                    
                     
                     } 
                 }
