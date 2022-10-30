@@ -2,7 +2,7 @@ pipeline {
     environment {
         scannerHome = tool name: 'sonarqube-scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
         registry = "bilel707/project_devops"
-        registryCredential = 'Docker_credent'
+        registryCredential = 'Docker_hub'
     }
     agent any
 //         docker {
