@@ -58,13 +58,7 @@ pipeline {
                 }
             }
         }
-        
-        
-        post{
-            always {  
-	            sh 'docker logout'     
-                }      
-        }  
+          
         
         
         stage('Test') {
@@ -80,4 +74,10 @@ pipeline {
             }
         }
     }
+	
+	post{
+            always {  
+	            sh 'docker logout'     
+                }      
+        }
 }
