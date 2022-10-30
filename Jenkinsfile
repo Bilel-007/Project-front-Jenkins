@@ -1,5 +1,6 @@
 pipeline {
     environment {
+        imagename = "bilel707/projectfront"
         scannerHome = tool name: 'sonarqube-scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
         registryCredential = 'Docker_hub'
     }
@@ -35,7 +36,7 @@ pipeline {
         stage("docker-build"){
             steps{
                 script {
-                    dockerImage = docker.build ("projectfront")   
+                    dockerImage = docker.build imagename   
                 }
             }
         }
@@ -44,7 +45,7 @@ pipeline {
         stage("docker-deploy-img"){
             steps{
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', registryCredential) {
+                    docker.withRegistry('', registryCredential) {
                         dockerImage.push('latest')
                     }
                 }
