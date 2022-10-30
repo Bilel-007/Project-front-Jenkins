@@ -1,7 +1,7 @@
 pipeline {
     environment {
         scannerHome = tool name: 'sonarqube-scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-   //     registryCredential = 'Docker_hub'
+        registryCredential = 'Docker_hub'
     }
     agent any
 //         docker {
@@ -44,7 +44,7 @@ pipeline {
         stage("docker-deploy-img"){
             steps{
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'Docker_hub') {
+                    docker.withRegistry('https://registry.hub.docker.com', registryCredential) {
                         dockerImage.push('latest')
                     }
                 }
