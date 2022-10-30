@@ -41,18 +41,11 @@ pipeline {
             }
         }
         
-        stage('Login to Docker Hub') {         
-            steps{                            
-	            sh 'echo $registryCredential_PSW | docker login -u $registryCredential_USR --password-stdin'                 
-	            echo 'Login Completed'                
-                }           
-        } 
-        
         
         stage("docker-deploy-img"){
             steps{
                 script {
-                    docker.withRegistry( '', registryCredential ) {
+                    docker.withRegistry('https://hub.docker.com/', registryCredential) {
                         dockerImage.push('latest')
                     }
                 }
@@ -74,10 +67,4 @@ pipeline {
             }
         }
     }
-	
-	post{
-            always {  
-	            sh 'docker logout'     
-                }      
-        }
 }
