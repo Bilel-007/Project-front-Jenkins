@@ -45,7 +45,9 @@ pipeline {
             steps{
                 script {
                     docker.withRegistry( '', registryCredential ) {
+                        docker.login(-u bilel707 -p ${registryCredential})
                     dockerImage.push('latest')
+                        docker.logout
                     }
                 }
             }
