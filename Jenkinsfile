@@ -41,17 +41,31 @@ pipeline {
             }
         }
         
+        stage('Login to Docker Hub') {         
+            steps{                            
+	            sh 'echo $registryCredential_PSW | docker login -u $registryCredential_USR --password-stdin'                 
+	            echo 'Login Completed'                
+                }           
+        } 
+        
+        
         stage("docker-deploy-img"){
             steps{
                 script {
                     docker.withRegistry( '', registryCredential ) {
-                        docker login -u bilel707 -p ${registryCredential}
                         dockerImage.push('latest')
-                        docker logout
                     }
                 }
             }
         }
+        
+        
+        post{
+            always {  
+	            sh 'docker logout'     
+                }      
+        }  
+        
         
         stage('Test') {
             steps {
